@@ -1,0 +1,6 @@
+{
+  "ignore": [".next", ".vscode", ".git", "cypress", "node_modules", "src/**/__tests__"],
+  "watch": ["server/**/*", "next.config.js"],
+  "ext": "js,jsx,json",
+  "verbose": true
+}

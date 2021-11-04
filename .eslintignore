@@ -1,0 +1,6 @@
+/.next/**
+/coverage/**
+/docs/**
+/jsdoc/**
+/server/stub/*
+/public/*
