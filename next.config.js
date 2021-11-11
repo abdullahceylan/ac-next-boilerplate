@@ -15,7 +15,7 @@ if (http2) {
   useCompress = false;
 }
 
-const configPlugins = [withBundleAnalyzer, withPWA];
+const configPlugins = [[withBundleAnalyzer], [withPWA]];
 
 const headers = [
   {
@@ -128,10 +128,10 @@ if (appConfig.serviceWorkerEnabled) {
       },
     ],
   };
-  configPlugins.push(withOffline);
+  configPlugins.push([withOffline]);
 }
 
-module.exports = withPlugins([configPlugins], nextConfig);
+module.exports = withPlugins([...configPlugins], nextConfig);
 
 // Don't delete this console log, useful to see the commerce config in Vercel deployments
-console.log('next.config.js', JSON.stringify(module.exports, null, 2));
+console.log('next.config.js', JSON.stringify(nextConfig, null, 2));

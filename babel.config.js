@@ -1,10 +1,12 @@
 const aliases = {
   '@components': './src/components',
-  '@styles': './layouts/styles',
-  '@theme': './layouts/theme',
   '@layouts': './layouts',
-  '@config': './src/config',
   '@utils': './src/utils',
+  '@store': './src/store',
+  '@hooks': './src/hooks',
+  '@public': './public',
+  '@pages': './pages',
+  '@server': './server',
 };
 
 module.exports = {
@@ -41,14 +43,7 @@ module.exports = {
           {
             root: ['./'],
             alias: {
-              '@components': './src/components',
-              '@layouts': './layouts',
-              '@utils': './src/utils',
-              '@store': './src/store',
-              '@hooks': './src/hooks',
-              '@public': './public',
-              '@pages': './pages',
-              '@server': './server',
+              ...aliases,
             },
             extensions: ['.js', '.jsx'],
           },

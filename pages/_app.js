@@ -1,5 +1,8 @@
+import 'tailwindcss/tailwind.css';
+
 import App from 'next/app';
-import Head from 'next/head';
+import { DefaultSeo } from 'next-seo';
+
 class ACApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
@@ -15,9 +18,11 @@ class ACApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <>
-        <Head>
-          <title>AC React, next.js</title>
-        </Head>
+        <DefaultSeo
+          titleTemplate="%s | ac-next-boilerplate"
+          defaultTitle="ac-next-boilerplate"
+          description="NextJS with Tailwind boilerplate"
+        />
         <Component {...pageProps} />
       </>
     );

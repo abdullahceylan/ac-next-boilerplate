@@ -1,18 +1,35 @@
-import { styled } from '@styles';
+import { tw } from '@styles';
 
-export const HomeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+export const HomeWrapper = tw.div`
+    flex
+    flex-col
+    items-center
+    justify-center
+    min-h-screen
+    py-2
 `;
 
-export const Content = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #f8f7f2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+export const Content = tw.main`
+  flex
+  flex-col
+  items-center
+  justify-center
+  w-full
+  flex-1
+  px-20
+  text-center
+`;
+
+export const PageTitle = tw.h1`
+  text-6xl
+  font-bold
+`;
+
+export const Footer = tw.footer`
+  flex
+  items-center
+  justify-center
+  w-full
+  h-24
+  border-t
 `;
