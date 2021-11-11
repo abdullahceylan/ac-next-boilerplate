@@ -1,6 +1,9 @@
 const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withOffline = require('next-offline');
+const withPWA = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache');
+
 const appConfig = require('./app.config');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -12,6 +15,27 @@ if (http2) {
   useCompress = false;
 }
 
+const configPlugins = [withBundleAnalyzer, withPWA];
+
+const headers = [
+  {
+    key: 'Strict-Transport-Security',
+    value: `max-age=${appConfig.stsMaxAge}; includeSubDomains; preload`,
+  },
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'SAMEORIGIN',
+  },
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block',
+  },
+];
+
 const nextConfig = {
   // reactStrictMode: true,
   assetPrefix: isProd && cdnHost ? cdnHost : '',
@@ -21,21 +45,11 @@ const nextConfig = {
     return [
       {
         source: '/',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-        ],
+        headers,
       },
       {
         source: '/:all*',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-        ],
+        headers,
       },
     ];
   },
@@ -50,6 +64,11 @@ const nextConfig = {
       analyzerMode: 'static',
       reportFilename: './bundle-report/client.html',
     },
+  },
+  pwa: {
+    disable: !isProd,
+    dest: 'public',
+    runtimeCaching,
   },
   webpack: (config, { defaultLoaders }) => {
     //  SVG support
@@ -68,8 +87,6 @@ const nextConfig = {
     return config;
   },
 };
-
-const configPlugins = [withBundleAnalyzer];
 
 if (appConfig.serviceWorkerEnabled) {
   nextConfig.workboxOpts = {
@@ -115,3 +132,6 @@ if (appConfig.serviceWorkerEnabled) {
 }
 
 module.exports = withPlugins([configPlugins], nextConfig);
+
+// Don't delete this console log, useful to see the commerce config in Vercel deployments
+console.log('next.config.js', JSON.stringify(module.exports, null, 2));

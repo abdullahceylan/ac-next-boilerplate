@@ -28,7 +28,7 @@ const listenMessage = (p = port) =>
     `
   API server is running at http://localhost:${port} as ${dev ? 'development' : process.env.NODE_ENV}
   ${chalk.green.bold('API Healthcheck')} → ${chalk.green(`http://localhost:${p}/api/healthcheck`)}
-  ${chalk.green.bold('API')} → ${chalk.green(`http://localhost:${p}`)} 
+  ${chalk.green.bold('Web')} → ${chalk.green(`http://localhost:${p}`)} 
 `,
   );
 

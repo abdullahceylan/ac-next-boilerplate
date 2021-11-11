@@ -3,7 +3,7 @@ import { ServerStyleSheet } from 'styled-components';
 import { miniGlobalCSS } from '@utils/helpers';
 import { globalStyles, GlobalNormalize } from '@layouts/styles';
 
-export default class CustomDocuments extends Document {
+export default class ACDocuments extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
